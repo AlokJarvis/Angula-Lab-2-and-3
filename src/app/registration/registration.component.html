@@ -1,0 +1,74 @@
+<div class="div">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-12">
+                <p>{{registerform.value|json}}</p>
+                
+                <h1 class="bg-primary text-center">Registration Form</h1>
+                <form #registerform="ngForm" (ngSubmit)="addProduct()" novalidate>
+                    <div class="form-group">
+                        <label for="id">Product ID</label>
+                        <input type="number" [class.is-invalid]="id.invalid" class="form-control is-invalid" name="id" 
+                        required="required" #id="ngModel" [(ngModel)]="product.pid">
+                        <div *ngIf="id.invalid && (id.dirty || id.touched)" class="alert alert-warning">
+                            <div *ngIf="id.errors.required">
+                                Id is Mandatory
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pname" >Product Name</label>
+                        <input type="text" [class.is-invalid]="pname.invalid" class="form-control" #pname="ngModel" required="required" minlength="4" name="pname" [(ngModel)]="product.pname">
+                        <div *ngIf="pname.invalid && (pname.dirty || pname.touched)" class="alert alert-warning">
+                            <div *ngIf="pname.errors.required">
+                                Name is Mandatory
+                            </div>
+                            <div *ngIf="pname.errors.minlength">
+                                Name must be of length 4
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pcost">Product Cost:</label>
+                        <input type="text" [class.is-invalid]="pcost.invalid" class="form-control is-invalid" required="required" name="pcost"
+                        #pcost="ngModel" [(ngModel)]="product.pcost"/>
+                        <div *ngIf="pcost.invalid && (pcost.dirty || pcost.touched)" class="alert alert-warning">
+                            <div *ngIf="pcost.errors.required">
+                               Cost is Mandatory
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ponline">Product Online:</label>
+                        
+                        <input type="radio" id="yes" class="form-input-check" value="yes" required="required" name="ponline"
+                        #ponline="ngModel" [(ngModel)]="product.ponline"/>Yes
+                        <input type="radio" id="no"   required="required" name="ponline" value="no" class="form-input-check"
+                        #ponline="ngModel" [(ngModel)]="product.ponline"/>No
+                           
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="pcat">Product Category:</label>
+
+                        <select name="category" class="form-control" [(ngModel)]="product.pcate">
+                            <option *ngFor="let p of products">{{p}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pavail">Available in Stores:</label>
+                        <input type="checkbox"  class="form-input-check" value="BigBazar"  name="bigbazar" />BigBazar
+                        <input type="checkbox" class="form-input-check" value="DMart"   name="dmart" />DMart
+                        <input type="checkbox" class="form-input-check" value="Reliance" name="reliance" />Reliance
+                        <input type="checkbox" class="form-input-check" value="MegaStore" name="megastore" />MegaStore
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Add Product</button>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
